@@ -188,7 +188,7 @@ public class StudentClass {
 		System.out.println("---SEARCH / FIND STUDENT---");		
 		student1.findStudent(1);
 		System.out.println("");	
-		student2.findStudent(2); 
+		student2.findStudent(5); 
 //		student3.findStudent(3);
 //		student4.findStudent(4);
 //		student5.findStudent(5);
