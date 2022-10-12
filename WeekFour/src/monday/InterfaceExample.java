@@ -8,8 +8,8 @@ public class InterfaceExample {
 
 		Thread t1 = new Thread(interfaceObj);
 		System.out.println("Thread Created");
-		System.out.println("Thread Started");
 		t1.start();
+		System.out.println("Thread Started");
 	}
 
 }
