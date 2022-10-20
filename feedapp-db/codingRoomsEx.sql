@@ -69,3 +69,12 @@ VALUES ('01', 'OW', '200mb', 'png', '01/01/0001', '400x400', '123abc');
 
 INSERT INTO "ImageMetaData" ("imageID", "imageName", "imageSize", "imageFormat", "imageDate", "resolution", "postKey") 
 VALUES ('02', 'OW2', '400mb', 'jpeg', '02/02/0002', '600x400', '456def');
+
+UPDATE "ImageMetaData" SET "postKey" = '789xyz' WHERE "postKey" = '456def';
+
+DELETE FROM "ImageMetaData" WHERE "postKey" = '789xyz';
+
+BEGIN;
+INSERT INTO "ImageMetaData" ("imageID", "imageName", "imageSize", "imageFormat", "imageDate", "resolution", "postKey") 
+VALUES ('02', 'OW2', '400mb', 'jpeg', '02/02/0002', '600x400', '456def');
+COMMIT;
