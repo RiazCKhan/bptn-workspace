@@ -52,7 +52,6 @@ FOREIGN KEY ("usernameKey")
 REFERENCES "UserID" ("username");
 
 -- IMAGEMETADATA
-
 DROP TABLE IF EXISTS "ImageMetaData" CASCADE;
 CREATE TABLE  "ImageMetaData" (
   "imageID" varchar(255) NOT NULL,
@@ -78,3 +77,43 @@ BEGIN;
 INSERT INTO "ImageMetaData" ("imageID", "imageName", "imageSize", "imageFormat", "imageDate", "resolution", "postKey") 
 VALUES ('02', 'OW2', '400mb', 'jpeg', '02/02/0002', '600x400', '456def');
 COMMIT;
+
+ALTER TABLE "ImageMetaData" ADD PRIMARY KEY ("imageID");
+
+ALTER TABLE "ImageMetaData"
+ADD CONSTRAINT "post_fkey" 
+FOREIGN KEY ("postKey") 
+REFERENCES "Post" ("postID");
+
+-- ADDRESS
+DROP TABLE IF EXISTS "Address" CASCADE;
+CREATE TABLE  "Address" (
+  "address" varchar(255) NOT NULL,
+  "city" varchar(255) NOT NULL,
+  "state" varchar(255),
+  "country" varchar(255),
+  "pincode" varchar(255),
+  "usernameKey" varchar(255)
+);
+
+INSERT INTO "Address" ("address", "city", "state", "country", "pincode", "usernameKey")
+VALUES ('NopeTown', 'NoWhere', 'No', 'NoState', '010101', 'Tom');
+
+INSERT INTO "Address" ("address", "city", "state", "country", "pincode", "usernameKey")
+VALUES ('BillStreet', 'Money', '$$$', 'MilliRow', '999', 'Sam');
+
+UPDATE "Address" SET "address" = 'Broke' WHERE "address" = 'NopeTown';
+
+DELETE FROM "Address" WHERE "address" = 'Broke';
+
+BEGIN;
+INSERT INTO "Address" ("address", "city", "state", "country", "pincode", "usernameKey")
+VALUES ('NopeTown', 'NoWhere', 'No', 'NoState', '010101', 'Tom');
+COMMIT; 
+
+ALTER TABLE "Address" ADD PRIMARY KEY ("usernameKey");
+
+ALTER TABLE "Address"
+ADD CONSTRAINT "address-usernameKey_fkey" 
+FOREIGN KEY ("usernameKey") 
+REFERENCES "UserID" ("username");

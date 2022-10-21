@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS "Post" CASCADE;
-CREATE TABLE  "Post" (
+CREATE TABLE "Post" (
   "postID" PRIMARY KEY VARCHAR(255) NOT NULL,
   "postType" VARCHAR(255),
   "usernameKey" VARCHAR(255) REFERENCES "UserID"("username")
