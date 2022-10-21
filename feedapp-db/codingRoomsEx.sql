@@ -148,3 +148,42 @@ INSERT INTO "Profile" ("position", "company", "companyAddress", "interests", "ex
 VALUES ('DevOps', 'Netflix', 'Chip CIty', 'Gym', '5 years', 'Bootcamp', 'FSD', 'Everything', 'English', 'JD');
 COMMIT;
 
+ALTER TABLE "Profile" ADD PRIMARY KEY ("usernameKey");
+
+ALTER TABLE "Profile"
+ADD CONSTRAINT "profile-usernameKey_fkey" 
+FOREIGN KEY ("usernameKey") 
+REFERENCES "UserID" ("username");
+
+-- ROLE
+DROP TABLE IF EXISTS "Role" CASCADE;
+CREATE TABLE  "Role" (
+  "roleName" varchar(255) NOT NULL,
+  "company" varchar(255) NOT NULL,
+  "skills" varchar(255) NOT NULL,
+  "usernameKey" varchar(255)
+);
+
+INSERT INTO "Role" ("roleName", "company", "skills", "usernameKey") VALUES ('CEO', 'Netflix', 'Anything', 'JD');
+
+INSERT INTO "Role" ("roleName", "company", "skills", "usernameKey") VALUES ('CEO', 'Shopify', 'Anything', 'Kim');
+
+UPDATE "Role" SET "company" = 'Google' WHERE "company" = 'Netflix';
+
+DELETE FROM "Role" WHERE "company" = 'Google';
+
+BEGIN;
+INSERT INTO "Role" ("roleName", "company", "skills", "usernameKey") VALUES ('CEO', 'Netflix', 'Anything', 'JD');
+COMMIT;
+
+ALTER TABLE "Role" ADD PRIMARY KEY ("usernameKey");
+
+ALTER TABLE "Role"
+ADD CONSTRAINT "role-usernameKey_fkey" 
+FOREIGN KEY ("usernameKey") 
+REFERENCES "UserID" ("username");
+
+
+SELECT "username" FROM "UserID" 
+INNER JOIN "Address" ON "UserID"."username" = "Address"."usernameKey" 
+WHERE "pincode" = '010101';
