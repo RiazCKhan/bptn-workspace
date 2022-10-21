@@ -187,3 +187,69 @@ REFERENCES "UserID" ("username");
 SELECT "username" FROM "UserID" 
 INNER JOIN "Address" ON "UserID"."username" = "Address"."usernameKey" 
 WHERE "pincode" = '010101';
+
+-- AUTHICATION_USER
+DROP TABLE IF EXISTS "AuthenticationUser" CASCADE;
+CREATE TABLE "AuthenticationUser" (
+  "usernameKey" varchar(255) NOT NULL,
+  "userPassword" varchar(255) NOT NULL,
+  "phoneNumber" varchar(255) NOT NULL,
+  "securityQuestion1" varchar(255) NOT NULL,
+  "securityQuestion2" varchar(255) NOT NULL,
+  "securityQuestion3" varchar(255) NOT NULL,
+  "securityAnswer1" varchar(255) NOT NULL,
+  "securityAnswer2" varchar(255) NOT NULL,
+  "securityAnswer3" varchar(255) NOT NULL
+);
+
+INSERT INTO "AuthenticationUser" ("usernameKey", "userPassword", "phoneNumber", 
+"securityQuestion1", "securityQuestion2", "securityQuestion3", 
+"securityAnswer1", "securityAnswer2", "securityAnswer3") 
+VALUES ('Jane', '123', '905', 'Guess1', 'Guess2', 'Guess3', '1', '2', '3');
+
+UPDATE "AuthenticationUser" SET "securityAnswer1" = '0' WHERE "phoneNumber" = '905';
+
+DELETE FROM "AuthenticationUser" WHERE "phoneNumber" = '905';
+
+BEGIN;
+INSERT INTO "AuthenticationUser" ("usernameKey", "userPassword", "phoneNumber", 
+"securityQuestion1", "securityQuestion2", "securityQuestion3", 
+"securityAnswer1", "securityAnswer2", "securityAnswer3") 
+VALUES ('Jane', '123', '905', 'Guess1', 'Guess2', 'Guess3', '1', '2', '3');
+COMMIT;
+
+ALTER TABLE "AuthenticationUser" ADD PRIMARY KEY ("usernameKey");
+
+ALTER TABLE "AuthenticationUser"
+ADD CONSTRAINT "auth-usernameKey_fkey" 
+FOREIGN KEY ("usernameKey") 
+REFERENCES "UserID" ("username");
+
+-- History
+DROP TABLE IF EXISTS "History" CASCADE;
+CREATE TABLE  "History" (
+  "postID" varchar(255) NOT NULL,
+  "date" varchar(255) NOT NULL,
+  "postType" varchar(255) NOT NULL,
+  "postUpload" varchar(255),
+  "usernameKey" varchar(255)
+);
+
+INSERT INTO "History" ("postID", "date", "postType", "postUpload", "usernameKey") 
+VALUES ('01', '04/04/0004', 'HumbleBrag', 'n/a', 'JD');
+
+UPDATE "History" SET "postType" = 'nvm' WHERE "postID" = '01';
+
+DELETE FROM "History" WHERE "postID" = '01';
+
+BEGIN;
+INSERT INTO "History" ("postID", "date", "postType", "postUpload", "usernameKey") 
+VALUES ('01', '04/04/0004', 'HumbleBrag', 'n/a', 'JD');
+COMMIT;
+
+ALTER TABLE "History" ADD PRIMARY KEY ("postID");
+
+ALTER TABLE "History"
+ADD CONSTRAINT "history-usernameKey_fkey" 
+FOREIGN KEY ("usernameKey") 
+REFERENCES "UserID" ("username");
