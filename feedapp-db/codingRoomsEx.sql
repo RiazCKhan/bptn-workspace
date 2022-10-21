@@ -117,3 +117,34 @@ ALTER TABLE "Address"
 ADD CONSTRAINT "address-usernameKey_fkey" 
 FOREIGN KEY ("usernameKey") 
 REFERENCES "UserID" ("username");
+
+-- PROFILE
+DROP TABLE IF EXISTS "Profile" CASCADE;
+CREATE TABLE  "Profile" (
+  "position" varchar(255) NOT NULL,
+  "company" varchar(255) NOT NULL,
+  "companyAddress" varchar(255) NOT NULL,
+  "interests" varchar(255) NOT NULL,
+  "experience" varchar(255) NOT NULL,
+  "education" varchar(255) NOT NULL,
+  "certification" varchar(255) NOT NULL,
+  "skills" varchar(255) NOT NULL,
+  "language" varchar(255) NOT NULL,
+  "usernameKey" varchar(255)
+);
+
+INSERT INTO "Profile" ("position", "company", "companyAddress", "interests", "experience", "education", "certification", "skills", "language", "usernameKey")
+VALUES ('DevOps', 'Netflix', 'Chip CIty', 'Gym', '5 years', 'Bootcamp', 'FSD', 'Everything', 'English', 'JD');
+
+INSERT INTO "Profile" ("position", "company", "companyAddress", "interests", "experience", "education", "certification", "skills", "language", "usernameKey")
+VALUES ('Senior Software', 'Shopify', 'Chip CIty', 'Draw', '10 years', 'Bootcamp', 'FSD', 'Everything', 'English', 'Kim');
+
+UPDATE "Profile" SET "company" = 'Google' WHERE "company" = 'Netflix';
+
+DELETE FROM "Profile" WHERE "company" = 'Google';
+
+BEGIN;
+INSERT INTO "Profile" ("position", "company", "companyAddress", "interests", "experience", "education", "certification", "skills", "language", "usernameKey")
+VALUES ('DevOps', 'Netflix', 'Chip CIty', 'Gym', '5 years', 'Bootcamp', 'FSD', 'Everything', 'English', 'JD');
+COMMIT;
+
