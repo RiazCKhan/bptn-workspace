@@ -4,23 +4,24 @@ CREATE DATABASE feedApp;
 DROP TABLE IF EXISTS "UserID" CASCADE;
 CREATE TABLE  "UserID" (
   "username" varchar(255) NOT NULL,
+  "name" varchar(255) NOT NULL,
   "emailID" varchar(255) NOT NULL,
   "phoneNumber" varchar(255),
   "userPassword" varchar(255)
 );
 
-INSERT INTO "UserID" ("username", "emailID", "phoneNumber", "userPassword") VALUES ('JD', 'JDn@mail.com', '416', '123');
-INSERT INTO "UserID" ("username", "emailID", "phoneNumber", "userPassword") VALUES ('Jane', 'JL@dmail.com', '905', '123');
-INSERT INTO "UserID" ("username", "emailID", "phoneNumber", "userPassword") VALUES ('Kim', 'KS@mail.com', '613', '123');
-INSERT INTO "UserID" ("username", "emailID", "phoneNumber", "userPassword") VALUES ('Tom', 'TM@mail.com', '413', '123');
-INSERT INTO "UserID" ("username", "emailID", "phoneNumber", "userPassword") VALUES ('Sam', 'SS@mail.com', '347', '123');
+INSERT INTO "UserID" ("username", "name", "emailID", "phoneNumber", "userPassword") VALUES ('JD', 'JackD', 'JDn@mail.com', '416', '123');
+INSERT INTO "UserID" ("username", "name", "emailID", "phoneNumber", "userPassword") VALUES ('Jane', 'Jane Doe', 'JL@dmail.com', '905', '123');
+INSERT INTO "UserID" ("username", "name", "emailID", "phoneNumber", "userPassword") VALUES ('Kim', 'Kim Soul', 'KS@mail.com', '613', '123');
+INSERT INTO "UserID" ("username", "name", "emailID", "phoneNumber", "userPassword") VALUES ('Tom', 'Tom Hatch', 'TM@mail.com', '413', '123');
+INSERT INTO "UserID" ("username", "name", "emailID", "phoneNumber", "userPassword") VALUES ('Sam', 'Sam Luck', 'SS@mail.com', '347', '123');
 
 UPDATE "UserID" SET "username" = 'JackDan' WHERE "username" = 'JD';
 
 DELETE FROM "UserID" WHERE "username" = 'JackDan';
 
 BEGIN;
-INSERT INTO "UserID" ("username", "emailID", "phoneNumber","userPassword") VALUES ('JD', 'JDn@mail.com', '416', '123');
+INSERT INTO "UserID" ("username", "name", "emailID", "phoneNumber","userPassword") VALUES ('JD', 'New', 'JDn@mail.com', '416', '123');
 COMMIT;
 
 ALTER TABLE "UserID" ADD PRIMARY KEY ("username");
