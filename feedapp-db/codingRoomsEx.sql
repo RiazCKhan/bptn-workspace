@@ -36,6 +36,7 @@ CREATE TABLE  "Post" (
 
 INSERT INTO "Post" ("postID", "postType", "usernameKey") VALUES ('123abc', 'vlog', 'Jane');
 INSERT INTO "Post" ("postID", "postType", "usernameKey") VALUES ('456def', 'blog', 'Kim');
+INSERT INTO "Post" ("postID", "postType", "usernameKey") VALUES ('789ghi', 'blog', 'JD');
 
 UPDATE "Post" SET "postID" = '789xyz' WHERE "postID" = '456def';
 
@@ -99,6 +100,9 @@ CREATE TABLE  "Address" (
 
 INSERT INTO "Address" ("address", "city", "state", "country", "pincode", "usernameKey")
 VALUES ('NopeTown', 'NoWhere', 'No', 'NoState', '010101', 'Tom');
+
+INSERT INTO "Address" ("address", "city", "state", "country", "pincode", "usernameKey")
+VALUES ('NopeTown', 'NoWhere', 'No', 'NoState', '010101', 'JD');
 
 INSERT INTO "Address" ("address", "city", "state", "country", "pincode", "usernameKey")
 VALUES ('BillStreet', 'Money', '$$$', 'MilliRow', '999', 'Sam');
@@ -254,3 +258,16 @@ ALTER TABLE "History"
 ADD CONSTRAINT "history-usernameKey_fkey" 
 FOREIGN KEY ("usernameKey") 
 REFERENCES "UserID" ("username");
+
+-- 6.1 & 6.2
+select t1.name, t2.image_id, t3.path
+from table1 t1 
+inner join table2 t2 on t1.person_id = t2.person_id
+inner join table3 t3 on t2.image_id=t3.image_id
+
+-- Create a view using Create View statement to Inner Join UserID, Post and Address table.
+
+SELECT "UserID"."username" AS "ID", "Address"."address", "Address"."pincode", "Post"."postType"
+FROM "UserID"
+INNER JOIN "Address" ON "UserID"."username" = "Address"."usernameKey"
+INNER JOIN "Post" ON "Address"."usernameKey" = "Post"."usernameKey";
