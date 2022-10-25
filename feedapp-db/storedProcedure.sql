@@ -14,4 +14,20 @@ $$
   END; 
 $$;
 
-CALL user_insert_data('Timmy Dow', 'TD@mail.com', '321', '123', 'TTDow');
+CALL user_insert_data ('Timmy Dow', 'TD@mail.com', '321', '123', 'TTDow');
+
+CREATE OR REPLACE PROCEDURE post_insert_data(
+  "_postID" VARCHAR,
+  "_postType" VARCHAR,
+  "_usernameKey" VARCHAR
+  )
+LANGUAGE plpgsql
+AS 
+$$
+  BEGIN
+    INSERT INTO "Post" ("postID", "postType", "usernameKey") 
+      VALUES (  "_postID", "_postType", "_usernameKey");
+  END; 
+$$;
+
+CALL post_insert_data ('999', 'TwitchLog', 'TTDOW');
