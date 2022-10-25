@@ -75,7 +75,7 @@ public class FeedAppClass {
 
 		String connectionString = "jdbc:postgresql://" + dbUrl + ":" + port + "/" + dbName;
 
-		addUser(connectionString, "Mike Lou", "ML@mail.com", "411", "123", "MikeLL");
+		addUser(connectionString, "Mihael Clue", "MC@mail.com", "511", "123", "MQ");
 		getAllUsers(connectionString);
 
 	}
